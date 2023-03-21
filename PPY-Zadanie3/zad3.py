@@ -1,0 +1,1 @@
+rounds = input("Ilość rund: ")
