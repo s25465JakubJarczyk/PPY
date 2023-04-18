@@ -1,7 +1,7 @@
 import smtplib
 
 
-# funkcja do wczytywania danych z pliku
+
 def load_students_data():
     students_data = {}
     with open('students.txt', 'r') as file:
@@ -17,7 +17,7 @@ def load_students_data():
     return students_data
 
 
-# funkcja do zapisywania danych studentów do pliku
+
 def save_students_data(students_data):
     with open('students.txt', 'w') as file:
         for email, data in students_data.items():
@@ -27,7 +27,7 @@ def save_students_data(students_data):
             file.write(f"{line}\n")
 
 
-# funkcja do automatycznego wystawiania ocen
+
 def assign_grades(students_data):
     for email, data in students_data.items():
         if data['status'] not in ['GRADED', 'MAILED'] and data['grade'] is None:
@@ -47,7 +47,7 @@ def assign_grades(students_data):
     save_students_data(students_data)
 
 
-# funkcja do usuwania studenta
+
 def delete_student(students_data, email):
     if email in students_data:
         del students_data[email]
@@ -57,7 +57,7 @@ def delete_student(students_data, email):
         print(f"Student with email {email} not found.")
 
 
-# funkcja do dodawania nowego studenta
+
 def add_student(students_data, email, first_name, last_name, points):
     if email in students_data:
         print("Student with this email already exists.")
@@ -68,7 +68,7 @@ def add_student(students_data, email, first_name, last_name, points):
         print("New student added.")
 
 
-# funkcja do wysyłania maili
+
 def send_emails(students_data):
     smtp_server = 'smtp.gmail.com'
     smtp_port = 587
@@ -87,6 +87,35 @@ def send_emails(students_data):
                 data['status'] = 'MAILED'
             save_students_data(students_data)
             print("Emails sent.")
+
+
+            while True:
+                print("Select an action:")
+                print("1. Assign grades automatically")
+                print("2. Delete a student")
+                print("3. Add a student")
+                print("4. Send emails")
+                print("5. Quit")
+                choice = input("Enter your choice: ")
+                if choice == '1':
+                    assign_grades(students_data)
+                elif choice == '2':
+                    email = input("Enter email of the student you want to delete: ")
+                    delete_student(students_data, email)
+                elif choice == '3':
+                    email = input("Enter email of the new student: ")
+                    first_name = input("Enter first name of the new student: ")
+                    last_name = input("Enter last name of the new student: ")
+                    points = int(input("Enter points of the new student: "))
+                    add_student(students_data, email, first_name, last_name, points)
+                elif choice == '4':
+                    send_emails(students_data)
+                elif choice == '5':
+                    break
+                else:
+                    print("Invalid choice.")
+
+
 
       
 
