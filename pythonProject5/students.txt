@@ -1,0 +1,5 @@
+bsmith5839@gmail.com,Bob,Smith,80
+johndoe_1978@hotmail.com,John,Doe,70
+anna.smithson@yahoo.com,Anna,Smithson,90
+johnson.lisa81@outlook.com,Lisa,Johnson,60
+peter.brown64@gmail.com,Peter,Brown,95
